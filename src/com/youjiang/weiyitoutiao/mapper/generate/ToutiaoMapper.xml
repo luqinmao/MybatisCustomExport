@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youjiang.weiyitoutiao.mapper.generate.ToutiaoMapper" >
+  <resultMap id="BaseResultMap" type="com.youjiang.weiyitoutiao.po.Toutiao" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="commentCount" property="commentcount" jdbcType="INTEGER" />
+    <result column="readingCount" property="readingcount" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="releaseTime" property="releasetime" jdbcType="VARCHAR" />
+    <result column="original" property="original" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, keyword, title, commentCount, readingCount, type, releaseTime, original, url, 
+    create_time, source
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.youjiang.weiyitoutiao.po.ToutiaoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from toutiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from toutiao
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from toutiao
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.youjiang.weiyitoutiao.po.ToutiaoExample" >
+    delete from toutiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.youjiang.weiyitoutiao.po.Toutiao" >
+    insert into toutiao (id, keyword, title, 
+      commentCount, readingCount, type, 
+      releaseTime, original, url, 
+      create_time, source)
+    values (#{id,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{commentcount,jdbcType=INTEGER}, #{readingcount,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{releasetime,jdbcType=VARCHAR}, #{original,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiang.weiyitoutiao.po.Toutiao" >
+    insert into toutiao
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="commentcount != null" >
+        commentCount,
+      </if>
+      <if test="readingcount != null" >
+        readingCount,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="releasetime != null" >
+        releaseTime,
+      </if>
+      <if test="original != null" >
+        original,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null" >
+        #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="readingcount != null" >
+        #{readingcount,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        #{releasetime,jdbcType=VARCHAR},
+      </if>
+      <if test="original != null" >
+        #{original,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.youjiang.weiyitoutiao.po.ToutiaoExample" resultType="java.lang.Integer" >
+    select count(*) from toutiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update toutiao
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyword != null" >
+        keyword = #{record.keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentcount != null" >
+        commentCount = #{record.commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.readingcount != null" >
+        readingCount = #{record.readingcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releasetime != null" >
+        releaseTime = #{record.releasetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.original != null" >
+        original = #{record.original,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update toutiao
+    set id = #{record.id,jdbcType=VARCHAR},
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      commentCount = #{record.commentcount,jdbcType=INTEGER},
+      readingCount = #{record.readingcount,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      releaseTime = #{record.releasetime,jdbcType=VARCHAR},
+      original = #{record.original,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiang.weiyitoutiao.po.Toutiao" >
+    update toutiao
+    <set >
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="commentcount != null" >
+        commentCount = #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="readingcount != null" >
+        readingCount = #{readingcount,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        releaseTime = #{releasetime,jdbcType=VARCHAR},
+      </if>
+      <if test="original != null" >
+        original = #{original,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiang.weiyitoutiao.po.Toutiao" >
+    update toutiao
+    set keyword = #{keyword,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      commentCount = #{commentcount,jdbcType=INTEGER},
+      readingCount = #{readingcount,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      releaseTime = #{releasetime,jdbcType=VARCHAR},
+      original = #{original,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
